@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useStyles } from './styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { AppBar, Toolbar, Typography, Button, Avatar } from '@material-ui/core';
 import image from '../../image/book.png';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -32,20 +29,21 @@ const Navbar = () => {
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
     return ( 
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
             <Toolbar>
                 <img src={image} alt="icon" height="50"/> 
                 <Typography component={Link} to="/" variant="h6" className={classes.title}>Book Blogs
                 </Typography>
                 {user?.result ? (
-                    <div>
-                        <p>you are logged in </p>
+                    <div className={classes.appBarCompContainer}>
+                        <Typography vairant="h6" className={classes.appBarComp}>{user?.result.name}</Typography>
+                        <Avatar src={user?.result.imageUrl} alt={user?.result.name} className={classes.avatar}>{user?.result.name.charAt(0)}</Avatar>
+                        <Button component={Link} to="/create" color="inherit" className={classes.appBarComp}>Create</Button>
+                        <Button variant="contained" color="secondary" onClick={logout} className={classes.appBarComp}>Logout</Button>
                     </div>
                 ) : (
                     <Button color="inherit" component={Link} to="/login">Login</Button>
                 )}
-                <Button component={Link} to="/create" color="inherit">Create</Button>
-                <Button variant="contained" color="secondary" onClick={logout}>Logout</Button>
             </Toolbar>
         </AppBar>
      );

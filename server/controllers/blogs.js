@@ -17,7 +17,7 @@ export const getBlog = async (req, res) => {
     const { id } = req.params;
     try {
         const blog = await BlogMessage.findById(id);
-        res.status(200).json(post);
+        res.status(200).json(blog);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -25,6 +25,7 @@ export const getBlog = async (req, res) => {
 //Creating a blog
 export const createBlog = async (req, res) => {
     const blog = req.body;
+    console.log(req.userId);
     const newBlogMessage = new BlogMessage({...blog, creator: req.userId, createdAt: new Date().toISOString() })
     try {
         await newBlogMessage.save();
