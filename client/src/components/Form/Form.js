@@ -7,6 +7,7 @@ import {createBlog} from '../../actions/blogs';
 import { useHistory } from 'react-router';
 
 const Form = ({ currentId, setCurrentId }) => {
+    const user = JSON.parse(localStorage.getItem('profile'));
     const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
@@ -22,7 +23,7 @@ const Form = ({ currentId, setCurrentId }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(createBlog(blogData));
+        dispatch(createBlog({ ...blogData, name: user?.result?.name}));
         clear();
         history.push("/");
     }

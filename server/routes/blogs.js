@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', getBlogs);
 router.get('/:id', getBlog);
 router.post('/',auth, createBlog);
-router.delete('/:id', deleteBlog);
+router.delete('/:id',auth, deleteBlog);
 router.patch('/:id/like', likeBlog);
 
 export default router;

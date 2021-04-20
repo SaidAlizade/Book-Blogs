@@ -57,14 +57,15 @@ const Blog = ({blog, currentId}) => {
                   <br/>
                   <div className={classes.bottomCompContainer}>
                     <Typography variant="p" className={classes.bottomComp}>RATING: {blog.rating}/10</Typography>
-                    <Typography className={classes.bottomComp}>{moment(blog.createdAt).fromNow()}</Typography>
+                    <Typography className={classes.bottomComp}>Created {moment(blog.createdAt).fromNow()}</Typography>
                   </div>
+                  <Typography>Created by:{blog.name}</Typography>
                 </CardContent>
               </Grid>
              </Grid>
              <CardContent className={classes.actionArea}>
-              <Button onClick={() => dispatch(deleteBlog(blog._id))}><DeleteIcon color="secondary"/>DELETE</Button>
-              <Button onClick={()=> dispatch(likeBlog(blog._id))}><FavoriteIcon color="primary"/>Likes: {blog.likes}</Button>
+               <Button onClick={() => dispatch(deleteBlog(blog._id))}><DeleteIcon color="secondary"/>DELETE</Button>
+               <Button onClick={()=> dispatch(likeBlog(blog._id))}><FavoriteIcon color="primary"/>Likes: {blog.likes}</Button>
              </CardContent>
             </Card>
      );
