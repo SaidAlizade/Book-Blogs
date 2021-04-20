@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme)=>({
 
 const Blog = ({blog, currentId}) => {
     const classes = useStyles();
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
     return ( 
             <Card className={classes.card}>
             <CardContent>
@@ -63,9 +64,11 @@ const Blog = ({blog, currentId}) => {
                 </CardContent>
               </Grid>
              </Grid>
-             <CardContent className={classes.actionArea}>
-               <Button onClick={() => dispatch(deleteBlog(blog._id))}><DeleteIcon color="secondary"/>DELETE</Button>
-               <Button onClick={()=> dispatch(likeBlog(blog._id))}><FavoriteIcon color="primary"/>Likes: {blog.likes}</Button>
+             <CardContent className={classes.actionArea}>   
+               {( user?.result?.googleId === blog?.creator || user?.result?._id === blog?.creator) && (
+                  <Button onClick={() => dispatch(deleteBlog(blog._id))} ><DeleteIcon color="secondary"/>DELETE</Button>
+               )}
+               <Button onClick={()=> dispatch(likeBlog(blog._id))} disabled={!user?.result}><FavoriteIcon color="primary"/>Likes: {blog.likes}</Button>
              </CardContent>
             </Card>
      );
