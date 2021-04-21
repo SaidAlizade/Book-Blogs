@@ -68,7 +68,7 @@ const Blog = ({blog, currentId}) => {
                {( user?.result?.googleId === blog?.creator || user?.result?._id === blog?.creator) && (
                   <Button onClick={() => dispatch(deleteBlog(blog._id))} ><DeleteIcon color="secondary"/>DELETE</Button>
                )}
-               <Button onClick={()=> dispatch(likeBlog(blog._id))} disabled={!user?.result}><FavoriteIcon color="primary"/>Likes: {blog.likes}</Button>
+               <Button onClick={()=> dispatch(likeBlog(blog._id))} disabled={!user?.result}><FavoriteIcon color="primary"/>Likes: {blog.likes.length}</Button>
              </CardContent>
             </Card>
      );

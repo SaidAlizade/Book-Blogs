@@ -6,6 +6,9 @@ import image from '../../image/book.png';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import * as actionType from '../../constants/actionType';
+import AddIcon from '@material-ui/icons/Add';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
+import LoginIcon from "@material-ui/icons/VpnKey";
 
 const Navbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -38,11 +41,11 @@ const Navbar = () => {
                     <div className={classes.appBarCompContainer}>
                         <Typography vairant="h6" className={classes.appBarComp}>{user?.result.name}</Typography>
                         <Avatar src={user?.result.imageUrl} alt={user?.result.name} className={classes.avatar}>{user?.result.name.charAt(0)}</Avatar>
-                        <Button component={Link} to="/create" color="inherit" className={classes.appBarComp}>Create</Button>
-                        <Button variant="contained" color="secondary" onClick={logout} className={classes.appBarComp}>Logout</Button>
+                        <Button component={Link} to="/create" color="inherit" className={classes.appBarComp}><AddIcon/>Create</Button>
+                        <Button variant="contained" color="secondary" onClick={logout} className={classes.appBarComp}><LogoutIcon/>Logout</Button>
                     </div>
                 ) : (
-                    <Button color="inherit" component={Link} to="/login">Login</Button>
+                    <Button color="inherit" component={Link} to="/login"><LoginIcon/>Login</Button>
                 )}
             </Toolbar>
         </AppBar>
